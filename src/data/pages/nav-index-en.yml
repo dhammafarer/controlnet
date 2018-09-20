@@ -1,0 +1,9 @@
+links:
+  - to: '/'
+    label: Home
+
+  - to: '/contact'
+    label: 根我們聯絡
+
+  - to: '/about'
+    label: 關於我們

@@ -1,0 +1,9 @@
+links:
+  - to: '/'
+    label: Home
+
+  - to: '/contact'
+    label: Contact
+
+  - to: '/about'
+    label: About

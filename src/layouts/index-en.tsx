@@ -55,10 +55,7 @@ export const query = graphql`
       }
     }
     nav: pagesYaml(id: {regex: "/nav-index-en.yml/"}) {
-      links {
-        to
-        label
-      }
+      ...NavPagesYaml
     }
   }
 `;

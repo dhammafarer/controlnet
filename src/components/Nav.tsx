@@ -117,3 +117,12 @@ const Nav: React.SFC<Props> = ({ open, handleClose, nav, classes, lang, title, l
 );
 
 export default withStyles(styles)(Nav);
+
+export const NavFragment = graphql`
+  fragment NavPagesYaml on PagesYaml {
+    links {
+      to
+      label
+    }
+  }
+`;

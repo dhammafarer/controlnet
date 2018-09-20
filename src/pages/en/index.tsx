@@ -1,19 +1,23 @@
 import * as React from 'react';
+import withLang from '../../components/hoc/withLang';
 
 interface Props {
+  lang: Lang
 }
 
 class IndexPageEn extends React.Component<Props, {}> {
   render () {
     return (
       <div>
-        Landing En
+        <p>
+          {this.props.lang}
+        </p>
       </div>
     );
   }
 }
 
-export default IndexPageEn;
+export default withLang(IndexPageEn);
 
 export const query = graphql`
   query IndexPageEnQuery {

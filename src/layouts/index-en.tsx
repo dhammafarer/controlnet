@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { LangContext } from '../context/lang-context';
 
 import withRoot from '../utils/withRoot';
 import App from '../components/structural/App';
@@ -26,14 +27,16 @@ class DefaultLayoutEn extends React.Component<Props, {}> {
     const {children, data, location} = this.props;
     console.log(data.site.siteMetadata.title.en);
     return (
-      <App
-        title={data.site.siteMetadata.title.en}
-        logo={data.logo.sizes.src}
-        lang={'en'}
-        nav={data.nav}
-      >
-        {children()}
-      </App>
+      <LangContext.Provider value='en'>
+        <App
+          title={data.site.siteMetadata.title.en}
+          logo={data.logo.sizes.src}
+          lang={'en'}
+          nav={data.nav}
+        >
+          {children()}
+        </App>
+      </LangContext.Provider>
     );
   }
 }

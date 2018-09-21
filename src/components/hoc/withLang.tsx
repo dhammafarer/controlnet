@@ -6,7 +6,7 @@ interface WithLangProps {
 }
 
 const withLang = <P extends object>(
-  Component:React.ComponentType<P>
+  Component:React.ComponentType<P & WithLangProps>
 ): React.SFC<P & WithLangProps> => (props) => (
   <LangContext.Consumer>
     {(lang:Lang) => 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { LangContext } from '../../context/lang-context';
+import { LangContext } from '../contexts/lang-context';
 
 interface WithLangProps {
   lang: Lang

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import withLang from '../../components/hoc/withLang';
+import withLang from '../../utils/withLang';
 
 interface Props {
   lang: Lang

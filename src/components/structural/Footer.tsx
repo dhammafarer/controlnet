@@ -15,22 +15,39 @@ interface Props {
   classes: any
   title: string
   logo: string
+  contact: {
+    details: Array<{name: string, phone: string, email: string, address: Array<string>}>
+  }
 }
 
-const Footer: React.SFC<Props> = ({ classes, title, logo }) => (
+interface CGProps {
+  classes: {
+    contactGroup: string
+  },
+  name: string
+  phone: string,
+  email: string,
+}
+
+const ContactGroup: React.SFC<CGProps> = ({classes, name, email, phone}) => (
+    <div className={classes.contactGroup}>
+      <Typography variant="title" color="inherit" gutterBottom>
+        {name}
+      </Typography>
+      <Typography variant="caption" color="inherit">
+        {email}
+      </Typography>
+      <Typography variant="caption" color="inherit">
+        {phone}
+      </Typography>
+    </div>
+);
+
+const Footer: React.SFC<Props> = ({ classes, title, logo, contact }) => (
   <footer className={classes.footer}>
     <div className={classNames(classes.footerAddress, classes.layout)}>
-      <img className={classes.logo} src={logo}/>
       <div className={classes.contact}>
-        <Typography variant="title" color="inherit" gutterBottom>
-          {title}
-        </Typography>
-        <Typography variant="caption" color="inherit">
-          info@baple.com
-        </Typography>
-        <Typography variant="caption" color="inherit">
-          +886-2-2345-2354
-        </Typography>
+        <ContactGroup {...contact.details[0]} classes={classes}/>
       </div>
     </div>
     <div className={classNames(classes.footerSocial, classes.layout)}>
@@ -41,7 +58,7 @@ const Footer: React.SFC<Props> = ({ classes, title, logo }) => (
     </div>
     <div className={classNames(classes.footerCopy, classes.layout)}>
       <Typography variant="caption" color="secondary">
-        © 2018 Copyright: <span className={classes.white}>Baple Group</span>
+        © 2018 Copyright: <span className={classes.white}>{title}</span>
       </Typography>
     </div>
   </footer>

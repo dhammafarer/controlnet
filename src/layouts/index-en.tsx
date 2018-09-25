@@ -23,8 +23,9 @@ interface Props {
 class DefaultLayoutEn extends React.Component<Props, {}> {
   render () {
     const {children, data} = this.props;
+    console.log(data);
     return (
-      <App  {...data.app}>
+      <App contact={data.contact} {...data.app}>
         {children()}
       </App>
     );
@@ -57,7 +58,7 @@ export const query = graphql`
         }
       }
     }
-    contact: pagesYaml(id: {regex: "/app-en.yml/"}) {
+    contact: pagesYaml(id: {regex: "/contact-en.yml/"}) {
       details {
         name
         phone

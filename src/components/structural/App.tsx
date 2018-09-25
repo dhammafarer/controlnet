@@ -14,9 +14,12 @@ interface Props {
   logo: GatsbyImage
   nav: any
   classes: any
+  contact: {
+    details: Array<any>
+  }
 }
 
-const App: React.SFC<Props> = ({ title, logo, children, nav, classes, lang }) => (
+const App: React.SFC<Props> = ({ title, logo, children, nav, classes, contact, lang }) => (
   <LangContext.Provider value={lang}>
     <div className={classes.layout}>
       <CssBaseline/>
@@ -25,7 +28,7 @@ const App: React.SFC<Props> = ({ title, logo, children, nav, classes, lang }) =>
       <main className={classes.main}>
         {children}
       </main>
-      <Footer logo={logo.childImageSharp.sizes.src} title={title}/>
+      <Footer contact={contact} logo={logo.childImageSharp.sizes.src} title={title}/>
     </div>
   </LangContext.Provider>
 );

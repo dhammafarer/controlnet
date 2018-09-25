@@ -16,12 +16,14 @@ const layoutStyles = (theme:Theme) => createStyles({
     flex: 1,
     width: '100%',
     maxWidth: 1600,
-    paddingLeft: theme.spacing.unit * 3,
-    paddingRight: theme.spacing.unit * 3,
     display: 'flex',
     flexDirection: 'column',
     paddingTop: 64,
     margin: '0 auto',
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: theme.spacing.unit * 3,
+      paddingRight: theme.spacing.unit * 3,
+    }
   }
 });
 

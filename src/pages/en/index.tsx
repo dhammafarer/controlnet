@@ -1,5 +1,6 @@
 import * as React from 'react';
 import SectionImage from '../../components/SectionImage';
+import SectionFeatured from '../../components/SectionFeatured';
 import Typography from "@material-ui/core/Typography";
   
 interface Props {
@@ -21,15 +22,15 @@ class IndexPageEn extends React.Component<Props, {}> {
     console.log(welcome);
     return (
       <div>
-        <SectionImage
+        <SectionFeatured
+          gradient="linear-gradient(rgba(255,255,255,0.9), rgba(0,0,0,0.5))"
           heading={welcome.heading}
+          subheading={welcome.subheading}
           image={welcome.image}
           text={welcome.text}
         />
         <SectionImage
-          reverse={true}
           heading={welcome.heading}
-          subheading={welcome.subheading}
           image={welcome.image}
           text={welcome.text}
         />

@@ -51,7 +51,7 @@ export const query = graphql`
         navLinks {
           to
           label
-          links {
+          navLinks {
             to
             label
           }

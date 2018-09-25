@@ -3,6 +3,9 @@ import Grid from "@material-ui/core/Grid";
 import { createStyles, withStyles } from "@material-ui/core/styles";
 
 const styles = createStyles({
+  section: {
+    width: '100%',
+  },
   container: {
     width: '100%',
   },
@@ -14,6 +17,7 @@ const styles = createStyles({
 type Props = {
   left: any
   right: any
+  reverse?: boolean
   classes: any
 };
 
@@ -23,17 +27,22 @@ class HorizontalSplit extends React.Component<Props, {}> {
   }
 
   render () {
-    const { classes, left, right } = this.props;
+    const { reverse, classes, left, right } = this.props;
 
     return (
-      <Grid container className={classes.container}>
-        <Grid item xs={12} md={6} className={classes.item}>
-          {left}
+      <section className={classes.section}>
+        <Grid container
+          direction={reverse ? 'row-reverse' : 'row'}
+          className={classes.container}
+        >
+          <Grid item xs={12} md={6} className={classes.item}>
+            {left}
+          </Grid>
+          <Grid item xs={12} md={6} className={classes.item}>
+            {right}
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6} className={classes.item}>
-          {right}
-        </Grid>
-      </Grid>
+      </section>
     )
   }
 }

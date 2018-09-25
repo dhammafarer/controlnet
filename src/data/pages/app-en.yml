@@ -6,7 +6,7 @@ nav:
   navLinks:
     - to: /solutions
       label: Solutions
-      links:
+      navLinks:
         - to: /scada
           label: SCADA
         - to: /microgrids

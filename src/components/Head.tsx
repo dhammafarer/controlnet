@@ -11,11 +11,10 @@ const Head: React.SFC<Props> = ({ lang, title }) => (
     title={title}
     htmlAttributes={{lang: lang}}
     meta={[
-      {name: 'description', content: 'Baple Group'},
+      {name: 'description', content: 'Controlnet International'},
     ]}
     link={[
-      {rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"},
-      {rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Cedarville+Cursive:400"},
+      {rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Nunito:300,400,500"},
       {rel: "stylesheet", href: "https://fonts.googleapis.com/icon?family=Material+Icons"}
     ]}
   />

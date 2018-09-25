@@ -1,6 +1,6 @@
 declare type Lang = 'en' | 'zh'
 
-declare interface GatsbyImage {
+declare interface ChildImageSharp {
   childImageSharp: {
     sizes: {
       src: string

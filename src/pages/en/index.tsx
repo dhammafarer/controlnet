@@ -1,23 +1,21 @@
 import * as React from 'react';
-import withLang from '../../utils/withLang';
+import HorizontalSplit from '../../components/layouts/HorizontalSplit';
 
 interface Props {
-  lang: Lang
 }
 
 class IndexPageEn extends React.Component<Props, {}> {
   render () {
     return (
-      <div>
-        <p>
-          {this.props.lang}
-        </p>
-      </div>
+      <HorizontalSplit
+        left={<p>left</p>}
+        right={<p>right</p>}
+      />
     );
   }
 }
 
-export default withLang(IndexPageEn);
+export default IndexPageEn;
 
 export const query = graphql`
   query IndexPageEnQuery {

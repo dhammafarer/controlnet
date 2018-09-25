@@ -33,7 +33,7 @@ const AppLanding: React.SFC<Props> = ({ title, children, classes, nav, lang }) =
   <div className={classes.layout}>
     <CssBaseline/>
     <Head title={title} lang={lang}/>
-    <Header lang={lang} nav={nav}/>
+    <Header nav={nav}/>
     <div className={classes.page}>
       {children}
     </div>

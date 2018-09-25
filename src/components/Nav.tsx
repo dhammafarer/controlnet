@@ -5,97 +5,93 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
+import { withStyles } from "@material-ui/core/styles";
+import styles from '../styles/nav-styles';
+import Link from 'gatsby-link';
+import CloseIcon from "@material-ui/icons/Close";
 import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
-import { createStyles, withStyles } from "@material-ui/core/styles";
-import Link from './Link';
-import CloseIcon from "@material-ui/icons/Close";
 
 interface Props {
-  lang: Lang
   classes: any
   handleClose: any
   open: any
+  logo: string
   title: string
-  logo: any
   nav: {
-    links: Array<any>
+    home: string
+    navLinks: Array<NavLink>
   }
 }
 
-const styles = (theme:any) => createStyles({
-  list: {
-    height: '100%',
-    width: 300,
-    display: 'flex',
-    flexDirection: 'column',
-    textAlign: 'center',
-    marginTop: '1.5em',
-    justifyContent: 'space-between',
-  },
-  logo: {
-    width: 150,
-    marginBottom: 20,
-  },
-  close: {
-    alignSelf: 'flex-end',
-    position: 'absolute',
-    top: 4,
-    right: 4,
-  },
-  contact: {
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    alignSelf: 'center',
-    width: '100%',
-    background: theme.palette.primary.main,
-    color: theme.palette.common.white,
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  details: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  icon: {
-    marginRight: '0.4em'
-  }
-});
-
-const Nav: React.SFC<Props> = ({ open, handleClose, nav, classes, lang, title, logo }) => (
+const Nav: React.SFC<Props> = ({ open, handleClose, nav, classes, logo, title}) => (
   <Drawer anchor="right" open={open} onClose={handleClose}>
     <div
       tabIndex={0}
       role="button"
       onClick={handleClose}
       onKeyDown={handleClose}
-      className={classes.list}
+      className={classes.nav}
     >
       <IconButton className={classes.close}>
         <CloseIcon color="secondary"/>
       </IconButton>
-      <List>
+      <Link to={nav.home}>
         <img className={classes.logo} src={logo}/>
-        <Typography variant="title" gutterBottom={true}>{title}</Typography>
+        <Typography variant="title" className={classes.title}>
+          {title}
+        </Typography>
+      </Link>
+      <List className={classes.list}>
+        <Divider/>
         {
-          nav.links.map((x:any) =>
-            <Link key={x.to} to={x.to} lang={lang}>
-              <ListItem button={true} divider={true} style={{justifyContent: "center"}}>
-                <Typography
-                  variant="caption"
-                  className={classes.item}
-                  color="secondary"
-                  align="center"
-                >
-                  {x.label}
-                </Typography>
+          nav.navLinks.map((x:any) => {
+            return (
+              x.navLinks ?
+              <ListItem divider className={classes.listItem}>
+                <List className={classes.list}>
+                  <ListItem button className={classes.listItem}>
+                    <Link to={x.to} className={classes.link}>
+                      <Typography
+                        variant="body1"
+                        color="inherit"
+                        className={classes.linkText}
+                      >
+                        {x.label}
+                      </Typography>
+                    </Link>
+                  </ListItem>
+                  {x.navLinks.map((y:any) =>
+                    <ListItem button key={y.to} className={classes.listItem}>
+                      <Link to={y.to} className={classes.linkNested}>
+                        <Typography
+                          variant="body1"
+                          color="inherit"
+                          className={classes.linkNestedText}
+                        >
+                          {y.label}
+                        </Typography>
+                      </Link>
+                    </ListItem>
+                  )}
+                </List>
               </ListItem>
-            </Link>
-          )
+              :
+              <ListItem key={x.to} button divider className={classes.listItem}>
+                <Link to={x.to} className={classes.link}>
+                  <Typography
+                    variant="body1"
+                    color="inherit"
+                    className={classes.linkText}
+                  >
+                    {x.label}
+                  </Typography>
+                </Link>
+              </ListItem>
+            )
+          })
         }
       </List>
       <div className={classes.contact}>
@@ -117,12 +113,3 @@ const Nav: React.SFC<Props> = ({ open, handleClose, nav, classes, lang, title, l
 );
 
 export default withStyles(styles)(Nav);
-
-export const NavFragment = graphql`
-  fragment NavPagesYaml on PagesYaml {
-    links {
-      to
-      label
-    }
-  }
-`;

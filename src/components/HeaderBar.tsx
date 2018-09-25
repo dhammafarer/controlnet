@@ -7,43 +7,24 @@ import Hidden from "@material-ui/core/Hidden";
 import Button from "@material-ui/core/Button";
 import MenuIcon from "@material-ui/icons/Menu";
 import Nav from './Nav';
-import { createStyles, withStyles } from "@material-ui/core/styles";
-import Link from './Link';
+import { withStyles } from "@material-ui/core/styles";
+import styles from '../styles/headerBar-styles';
+import Link from 'gatsby-link';
 
 interface Props {
-  lang: Lang
   classes: any
   handleClose: any
   toggleMenu: any
   open: any
   title: string
-  logo: any
+  logo: string
   nav: {
-    links: Array<any>
-  },
+    home: string
+    navLinks: Array<NavLink>
+  }
 }
 
-const styles = createStyles({
-  bar: {
-    backgroundColor: 'white',
-  },
-  grow: {
-    flexGrow: 1
-  },
-  logo: {
-    marginTop: 5,
-    marginRight: 10,
-    width: 48,
-    height: 48,
-    alignSelf: 'center',
-  },
-  title: {
-    textTransform: 'uppercase'
-  },
-  lang: {}
-});
-
-const HeaderBar: React.SFC<Props> = ({ classes, open, handleClose, toggleMenu, title, logo, nav, lang }) => (
+const HeaderBar: React.SFC<Props> = ({ classes, open, handleClose, toggleMenu, nav, title, logo }) => (
     <div>
       <AppBar position="fixed" className={classes.bar}>
         <Toolbar>
@@ -54,27 +35,27 @@ const HeaderBar: React.SFC<Props> = ({ classes, open, handleClose, toggleMenu, t
             </Typography>
           </Hidden>
           <div className={classes.grow}/>
-          <div className={classes.langs}>
-            {
-              ['en','zh'].map(x =>
-                <Link key={x} to='/' lang={x}>
-                  <Button
-                    className={classes.lang}
-                    size="small"
-                    color={x===lang ? 'default':'secondary'}
-                >
-                    {x}
-                  </Button>
-                </Link>
-              )
-            }
+          <div>
+            {nav.navLinks.map(x =>
+              <Link key={x.to} to={x.to}>
+                <Button className={classes.link}>
+                  {x.label}
+                </Button>
+              </Link>
+            )}
           </div>
           <IconButton color="primary" onClick={toggleMenu}>
             <MenuIcon/>
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Nav lang={lang} title={title} logo={logo} nav={nav} open={open} handleClose={handleClose}/>
+      <Nav
+        nav={nav}
+        logo={logo}
+        title={title}
+        open={open}
+        handleClose={handleClose}
+      />
     </div>
 );
 

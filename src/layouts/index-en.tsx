@@ -1,42 +1,32 @@
 import * as React from 'react';
-import { LangContext } from '../contexts/lang-context';
 
 import withRoot from '../utils/withRoot';
 import App from '../components/structural/App';
 
+
 interface Props {
   children: any
-  location: {
-    pathname: string
-  }
   data: {
-    site: {
-      siteMetadata: {
-        title: {
-          en: string
-        }
+    app: {
+      title: string
+      lang: Lang
+      logo: GatsbyImage
+      nav: {
+        home: string
+        links: Array<NavLink>
       }
     }
-    logo: any
-    nav: any
+    contact: any
   }
 }
 
 class DefaultLayoutEn extends React.Component<Props, {}> {
   render () {
-    const {children, data, location} = this.props;
-    console.log(data.site.siteMetadata.title.en);
+    const {children, data} = this.props;
     return (
-      <LangContext.Provider value='en'>
-        <App
-          title={data.site.siteMetadata.title.en}
-          logo={data.logo.sizes.src}
-          lang={'en'}
-          nav={data.nav}
-        >
-          {children()}
-        </App>
-      </LangContext.Provider>
+      <App  {...data.app}>
+        {children()}
+      </App>
     );
   }
 }
@@ -45,20 +35,35 @@ export default withRoot(DefaultLayoutEn);
 
 export const query = graphql`
   query DefaultLayoutEnQuery {
-    site {
-      siteMetadata {
-        title {
-          en
+    app: pagesYaml(id: {regex: "/app-en.yml/"}) {
+      title
+      logo {
+        childImageSharp {
+          sizes(maxWidth: 220) {
+            src
+          }
+        }
+      }
+      lang
+      nav {
+        home
+        navLinks {
+          to
+          label
+          links {
+            to
+            label
+          }
         }
       }
     }
-    logo: imageSharp(id: {regex: "/ctn-logo-square.jpg/"}) {
-      sizes(maxWidth: 120) {
-        ...GatsbyImageSharpSizes
+    contact: pagesYaml(id: {regex: "/app-en.yml/"}) {
+      details {
+        name
+        phone
+        email
+        address
       }
-    }
-    nav: pagesYaml(id: {regex: "/nav-index-en.yml/"}) {
-      ...NavPagesYaml
     }
   }
 `;
